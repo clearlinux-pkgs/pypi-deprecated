@@ -4,25 +4,34 @@
 #
 Name     : pypi-deprecated
 Version  : 1.2.13
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/c8/d1/e412abc2a358a6b9334250629565fe12697ca1cdee4826239eddf944ddd0/Deprecated-1.2.13.tar.gz
 Source0  : https://files.pythonhosted.org/packages/c8/d1/e412abc2a358a6b9334250629565fe12697ca1cdee4826239eddf944ddd0/Deprecated-1.2.13.tar.gz
 Summary  : Python @deprecated decorator to deprecate old python classes, functions or methods.
 Group    : Development/Tools
 License  : MIT
+Requires: pypi-deprecated-license = %{version}-%{release}
 Requires: pypi-deprecated-python = %{version}-%{release}
 Requires: pypi-deprecated-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-BuildRequires : pluggy
-BuildRequires : py-python
+BuildRequires : pypi(pluggy)
+BuildRequires : pypi(py)
+BuildRequires : pypi(pytest)
+BuildRequires : pypi(tox)
+BuildRequires : pypi(virtualenv)
 BuildRequires : pypi(wrapt)
-BuildRequires : pytest
-BuildRequires : tox
-BuildRequires : virtualenv
 
 %description
 Python @deprecated decorator to deprecate old python classes,
 functions or methods.
+
+%package license
+Summary: license components for the pypi-deprecated package.
+Group: Default
+
+%description license
+license components for the pypi-deprecated package.
+
 
 %package python
 Summary: python components for the pypi-deprecated package.
@@ -53,7 +62,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1639043710
+export SOURCE_DATE_EPOCH=1641512750
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -68,6 +77,8 @@ python3 -m build --wheel --skip-dependency-check --no-isolation
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pypi-deprecated
+cp %{_builddir}/Deprecated-1.2.13/LICENSE.rst %{buildroot}/usr/share/package-licenses/pypi-deprecated/fe0f6b91b1353d648f32cc17b5ca12d42614e8da
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -75,6 +86,10 @@ echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-deprecated/fe0f6b91b1353d648f32cc17b5ca12d42614e8da
 
 %files python
 %defattr(-,root,root,-)
