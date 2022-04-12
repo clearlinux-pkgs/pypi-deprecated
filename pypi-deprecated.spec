@@ -4,7 +4,7 @@
 #
 Name     : pypi-deprecated
 Version  : 1.2.13
-Release  : 3
+Release  : 4
 URL      : https://files.pythonhosted.org/packages/c8/d1/e412abc2a358a6b9334250629565fe12697ca1cdee4826239eddf944ddd0/Deprecated-1.2.13.tar.gz
 Source0  : https://files.pythonhosted.org/packages/c8/d1/e412abc2a358a6b9334250629565fe12697ca1cdee4826239eddf944ddd0/Deprecated-1.2.13.tar.gz
 Summary  : Python @deprecated decorator to deprecate old python classes, functions or methods.
@@ -14,12 +14,12 @@ Requires: pypi-deprecated-license = %{version}-%{release}
 Requires: pypi-deprecated-python = %{version}-%{release}
 Requires: pypi-deprecated-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-BuildRequires : pypi(pluggy)
 BuildRequires : pypi(py)
-BuildRequires : pypi(pytest)
-BuildRequires : pypi(tox)
-BuildRequires : pypi(virtualenv)
 BuildRequires : pypi(wrapt)
+BuildRequires : pypi-pluggy
+BuildRequires : pypi-pytest
+BuildRequires : pypi-tox
+BuildRequires : pypi-virtualenv
 
 %description
 Python @deprecated decorator to deprecate old python classes,
@@ -62,7 +62,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641512750
+export SOURCE_DATE_EPOCH=1649736664
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
