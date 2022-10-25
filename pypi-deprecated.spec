@@ -4,7 +4,7 @@
 #
 Name     : pypi-deprecated
 Version  : 1.2.13
-Release  : 11
+Release  : 12
 URL      : https://files.pythonhosted.org/packages/c8/d1/e412abc2a358a6b9334250629565fe12697ca1cdee4826239eddf944ddd0/Deprecated-1.2.13.tar.gz
 Source0  : https://files.pythonhosted.org/packages/c8/d1/e412abc2a358a6b9334250629565fe12697ca1cdee4826239eddf944ddd0/Deprecated-1.2.13.tar.gz
 Summary  : Python @deprecated decorator to deprecate old python classes, functions or methods.
