@@ -6,13 +6,14 @@
 # autospec commit: 94c6be0
 #
 Name     : pypi-deprecated
-Version  : 1.2.16
-Release  : 20
-URL      : https://files.pythonhosted.org/packages/36/a5/eaedf9a5c49155e4bba35f225f366e68de079e04827fc291569c9d2e399d/deprecated-1.2.16.tar.gz
-Source0  : https://files.pythonhosted.org/packages/36/a5/eaedf9a5c49155e4bba35f225f366e68de079e04827fc291569c9d2e399d/deprecated-1.2.16.tar.gz
+Version  : 1.2.18
+Release  : 21
+URL      : https://files.pythonhosted.org/packages/98/97/06afe62762c9a8a86af0cfb7bfdab22a43ad17138b07af5b1a58442690a2/deprecated-1.2.18.tar.gz
+Source0  : https://files.pythonhosted.org/packages/98/97/06afe62762c9a8a86af0cfb7bfdab22a43ad17138b07af5b1a58442690a2/deprecated-1.2.18.tar.gz
 Summary  : Python @deprecated decorator to deprecate old python classes, functions or methods.
 Group    : Development/Tools
 License  : MIT
+Requires: pypi-deprecated-license = %{version}-%{release}
 Requires: pypi-deprecated-python = %{version}-%{release}
 Requires: pypi-deprecated-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
@@ -28,6 +29,14 @@ BuildRequires : pypi-virtualenv
 %description
 Python @deprecated decorator to deprecate old python classes,
 functions or methods.
+
+%package license
+Summary: license components for the pypi-deprecated package.
+Group: Default
+
+%description license
+license components for the pypi-deprecated package.
+
 
 %package python
 Summary: python components for the pypi-deprecated package.
@@ -50,10 +59,10 @@ python3 components for the pypi-deprecated package.
 
 
 %prep
-%setup -q -n deprecated-1.2.16
-cd %{_builddir}/deprecated-1.2.16
+%setup -q -n deprecated-1.2.18
+cd %{_builddir}/deprecated-1.2.18
 pushd ..
-cp -a deprecated-1.2.16 buildavx2
+cp -a deprecated-1.2.18 buildavx2
 popd
 
 %build
@@ -61,7 +70,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1737731425
+export SOURCE_DATE_EPOCH=1737992247
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -106,6 +115,8 @@ ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pypi-deprecated
+cp %{_builddir}/deprecated-%{version}/LICENSE.rst %{buildroot}/usr/share/package-licenses/pypi-deprecated/fe0f6b91b1353d648f32cc17b5ca12d42614e8da || :
 python3 -m installer --destdir=%{buildroot} dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -122,6 +133,10 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-deprecated/fe0f6b91b1353d648f32cc17b5ca12d42614e8da
 
 %files python
 %defattr(-,root,root,-)
